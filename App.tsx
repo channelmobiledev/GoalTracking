@@ -1,16 +1,65 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Text} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
+const Tab = createMaterialBottomTabNavigator();
+
+const Navigation = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Goals"
+        component={GoalsComponent}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="death-star" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={GoalsComponent}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
 
 const App = () => {
   return (
     <NavigationContainer>
-      <SafeAreaView>
-        <StatusBar />
-        <Text> Hello :D </Text>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.navigationContainer}>
+          <Navigation />
+        </View>
       </SafeAreaView>
     </NavigationContainer>
   );
 };
+
+// --
+
+const GoalsComponent = () => {
+  return <GoalsScreen />;
+};
+
+const GoalsScreen = () => {
+  return (
+    <>
+      <Text> Hello :D </Text>
+    </>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {flex: 1},
+  navigationContainer: {flex: 1},
+});
 
 export default App;
