@@ -3,6 +3,7 @@ import {SafeAreaView, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import GoalsComponent from './src/components/Goals/goals.component';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -40,20 +41,6 @@ const App = () => {
         </View>
       </SafeAreaView>
     </NavigationContainer>
-  );
-};
-
-// --
-
-const GoalsComponent = () => {
-  return <GoalsScreen />;
-};
-
-const GoalsScreen = () => {
-  return (
-    <>
-      <Text> Hello :D </Text>
-    </>
   );
 };
 
