@@ -6,9 +6,18 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import GoalsComponent from './src/components/Goals/goals.component';
 import ProfileComponent from './src/components/Profile/profile.component';
 
+/**
+ * Navigation Stacks
+ */
 const Tab = createMaterialBottomTabNavigator();
 
+/**
+ * Navigation Component
+ */
 const Navigation = () => {
+  /**
+   * Render
+   */
   return (
     <Tab.Navigator>
       <Tab.Screen
@@ -33,7 +42,13 @@ const Navigation = () => {
   );
 };
 
+/**
+ * Main Component
+ */
 const App = () => {
+  /**
+   * Render
+   */
   return (
     <NavigationContainer>
       <SafeAreaView style={styles.container}>
@@ -45,6 +60,9 @@ const App = () => {
   );
 };
 
+/**
+ * Styles
+ */
 const styles = StyleSheet.create({
   container: {flex: 1},
   navigationContainer: {flex: 1},
