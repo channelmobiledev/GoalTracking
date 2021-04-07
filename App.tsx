@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import GoalsComponent from './src/components/Goals/goals.component';
+import ProfileComponent from './src/components/Profile/profile.component';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -21,7 +22,7 @@ const Navigation = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={GoalsComponent}
+        component={ProfileComponent}
         options={{
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="account" color={color} size={26} />
