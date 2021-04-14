@@ -5,11 +5,28 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import GoalsComponent from './src/components/Goals/goals.component';
 import ProfileComponent from './src/components/Profile/profile.component';
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 
 /**
  * Navigation Stacks
  */
 const Tab = createMaterialBottomTabNavigator();
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  myOwnProperty: true,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#009688',
+    accent: '#00BCD4',
+    LightPrimary: '#B2DFDB',
+    DarkPrimary: '#00796B',
+    text: '#212121',
+    textPrimary: '#FFFFFF',
+    secondaryText: '#757575',
+    divider: '#BDBDBD',
+  },
+};
 
 /**
  * Navigation Component
@@ -50,13 +67,15 @@ const App = () => {
    * Render
    */
   return (
-    <NavigationContainer>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.navigationContainer}>
-          <Navigation />
-        </View>
-      </SafeAreaView>
-    </NavigationContainer>
+    <PaperProvider theme={theme}>
+      <NavigationContainer theme={theme}>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.navigationContainer}>
+            <Navigation />
+          </View>
+        </SafeAreaView>
+      </NavigationContainer>
+    </PaperProvider>
   );
 };
 
