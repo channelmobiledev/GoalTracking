@@ -1,11 +1,12 @@
 import React from 'react';
-import {FlatList} from 'react-native';
-import {List, Text} from 'react-native-paper';
+import {FlatList, StyleSheet} from 'react-native';
+import {FAB, List} from 'react-native-paper';
 
 /**
  * Props
  */
 interface Props {
+  onFABPress: () => void;
   data: any;
 }
 
@@ -39,8 +40,18 @@ const GoalsScreen = (props: Props) => {
         renderItem={ListItemView}
         keyExtractor={item => item.id}
       />
+      <FAB style={styles.fab} icon="plus" onPress={() => props.onFABPress()} />
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
+});
 
 export default GoalsScreen;

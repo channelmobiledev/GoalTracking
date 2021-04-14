@@ -4,7 +4,7 @@ import GoalsScreen from './goals.screen';
 /**
  * Goals Component
  */
-const GoalsComponent = () => {
+const GoalsComponent = ({navigation}: any) => {
   /**
    * States
    */
@@ -72,9 +72,16 @@ const GoalsComponent = () => {
   ]);
 
   /**
+   * Handles FAB Press
+   */
+  const handleFABPress = () => {
+    navigation.navigate('AddGoal');
+  };
+
+  /**
    * Render
    */
-  return <GoalsScreen data={data} />;
+  return <GoalsScreen data={data} onFABPress={() => handleFABPress()} />;
 };
 
 export default GoalsComponent;
