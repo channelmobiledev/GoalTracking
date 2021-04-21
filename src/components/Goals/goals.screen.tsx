@@ -1,13 +1,14 @@
 import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
-import {FAB, List} from 'react-native-paper';
+import {FlatList, StyleSheet, View} from 'react-native';
+import {FAB, List, Text, Title} from 'react-native-paper';
+import {Goal} from '../../models/GoalModel';
 
 /**
  * Props
  */
 interface Props {
   onFABPress: () => void;
-  data: any;
+  data: Array<Goal>;
 }
 
 /**
@@ -31,21 +32,46 @@ const GoalsScreen = (props: Props) => {
   };
 
   /**
+   * Renders if there's data
+   */
+  const RenderData = () => {
+    return (
+      <FlatList
+        data={props.data}
+        renderItem={ListItemView}
+        keyExtractor={item => item.id.toString()}
+      />
+    );
+  };
+
+  /**
+   * Renders if there's no data
+   */
+  const RenderNoData = () => {
+    return (
+      <View style={styles.containerNoData}>
+        <Title>No goals added</Title>
+      </View>
+    );
+  };
+
+  /**
    * Render
    */
   return (
     <>
-      <FlatList
-        data={props.data}
-        renderItem={ListItemView}
-        keyExtractor={item => item.id}
-      />
+      {props.data ? RenderData() : RenderNoData()}
       <FAB style={styles.fab} icon="plus" onPress={() => props.onFABPress()} />
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  containerNoData: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   fab: {
     position: 'absolute',
     margin: 16,
