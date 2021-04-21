@@ -17,7 +17,7 @@ const GoalsScreen = (props: Props) => {
   /**
    * Shows the list item view
    */
-  const ListItemView = ({item}) => {
+  const ListItemView = ({item}: any) => {
     /**
      * Render
      */
