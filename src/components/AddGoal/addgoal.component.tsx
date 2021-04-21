@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {getData, storeData} from '../../Constants/storage';
 import {Goal} from '../../models/GoalModel';
 import AddGoalScreen from './addgoal.screen';
@@ -8,9 +8,19 @@ import AddGoalScreen from './addgoal.screen';
  */
 const AddGoalComponent = ({navigation}: any) => {
   /**
+   * States
+   */
+  const [loading, setLoading] = useState<boolean>(false);
+
+  /**
    * Add value to the current goal array
    */
   const addToGoalArray = async (title: string, description: string) => {
+    /**
+     * Shows loading animation
+     */
+    setLoading(true);
+
     /**
      * Get the stored Goal Array
      */
@@ -50,6 +60,11 @@ const AddGoalComponent = ({navigation}: any) => {
     await storeData(currentGoalArray);
 
     /**
+     * hides loading animation
+     */
+    setLoading(false);
+
+    /**
      * Navigate back to the Goal Screen
      */
     navigation.navigate('Home');
@@ -59,6 +74,7 @@ const AddGoalComponent = ({navigation}: any) => {
    * Returns data from the form
    */
   const handleOnResult = (goal: string) => {
+    // TODO Refactor the description with an actual description
     addToGoalArray(goal, 'TODO');
   };
 
@@ -67,7 +83,10 @@ const AddGoalComponent = ({navigation}: any) => {
    */
   return (
     <>
-      <AddGoalScreen onSubmitPress={(goal: string) => handleOnResult(goal)} />
+      <AddGoalScreen
+        loading={loading}
+        onSubmitPress={(goal: string) => handleOnResult(goal)}
+      />
     </>
   );
 };
