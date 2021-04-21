@@ -1,75 +1,30 @@
-import React, {useState} from 'react';
+import {useFocusEffect} from '@react-navigation/core';
+import React, {useCallback, useState} from 'react';
 import GoalsScreen from './goals.screen';
 
 /**
  * Goals Component
  */
-const GoalsComponent = ({navigation}: any) => {
+const GoalsComponent = ({route, navigation}: any) => {
   /**
    * States
    */
-  const [data, setData] = useState([
-    {
-      id: '1',
-      title: 'Hello :D 1',
-    },
-    {
-      id: '2',
-      title: 'Hello :D 2',
-    },
-    {
-      id: '3',
-      title: 'Hello :D 3',
-    },
-    {
-      id: '4',
-      title: 'Hello :D 4',
-    },
-    {
-      id: '5',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '6',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '7',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '8',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '9',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '10',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '11',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '12',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '13',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '14',
-      title: 'Hello :D 5',
-    },
-    {
-      id: '15',
-      title: 'Hello :D 5',
-    },
-  ]);
+  const [data, setData] = useState<Array<any>>([]);
+
+  /**
+   * Checks for returning data
+   */
+  const checkReturnData = useCallback(() => {
+    if (route.params?.goal) {
+      setData([
+        ...data,
+        {
+          id: (data.length + 1).toString(),
+          title: 'Hello :D 1',
+        },
+      ]);
+    }
+  }, []);
 
   /**
    * Handles FAB Press
@@ -77,6 +32,12 @@ const GoalsComponent = ({navigation}: any) => {
   const handleFABPress = () => {
     navigation.navigate('AddGoal');
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      checkReturnData();
+    }, [checkReturnData]),
+  );
 
   /**
    * Render
