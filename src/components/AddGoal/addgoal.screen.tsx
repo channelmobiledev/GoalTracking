@@ -34,6 +34,7 @@ const AddGoalScreen = (props: Props) => {
       <Portal>
         <Modal
           visible={props.loading}
+          dismissable={false}
           contentContainerStyle={styles.containerModal}>
           <ActivityIndicator
             size={'large'}
