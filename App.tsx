@@ -7,11 +7,33 @@ import GoalsComponent from './src/components/Goals/goals.component';
 import ProfileComponent from './src/components/Profile/profile.component';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {theme} from './src/Constants/constants';
+import {createStackNavigator} from '@react-navigation/stack';
+import AddGoalComponent from './src/components/AddGoal/addgoal.component';
 
 /**
  * Navigation Stacks
  */
+const GoalsStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
+
+/**
+ * Handles the Goals stack navigation
+ */
+const GoalsStackHandler = () => {
+  /**
+   * Render
+   */
+  return (
+    <GoalsStack.Navigator>
+      <GoalsStack.Screen
+        name="Home"
+        component={GoalsComponent}
+        options={{headerShown: false}}
+      />
+      <GoalsStack.Screen name="AddGoal" component={AddGoalComponent} />
+    </GoalsStack.Navigator>
+  );
+};
 
 /**
  * Navigation Component
@@ -24,7 +46,7 @@ const Navigation = () => {
     <Tab.Navigator>
       <Tab.Screen
         name="Goals"
-        component={GoalsComponent}
+        component={GoalsStackHandler}
         options={{
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="death-star" color={color} size={26} />
