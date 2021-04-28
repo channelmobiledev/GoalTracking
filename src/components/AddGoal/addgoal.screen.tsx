@@ -53,15 +53,23 @@ const AddGoalScreen = (props: Props) => {
   return (
     <ScrollView style={styles.container}>
       <LoadingAnimation />
-      <View style={{justifyContent: 'flex-start'}}>
+      <View style={styles.containerForm}>
         <TextInput
+          style={styles.formFieldStyle}
           mode="outlined"
           label="Goal"
           value={goal}
           onChangeText={text => setGoal(text)}
         />
-
+        <Button
+          style={styles.formFieldStyle}
+          icon="help-circle"
+          mode="contained"
+          onPress={() => {}}>
+          Category
+        </Button>
         <TextInput
+          style={styles.formFieldStyle}
           mode="outlined"
           multiline
           label="Description"
@@ -89,8 +97,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   containerModal: {backgroundColor: 'transparent', padding: 20},
+  containerForm: {
+    flex: 1,
+  },
   containerConfirm: {
     marginVertical: 20,
+  },
+  formFieldStyle: {
+    marginVertical: 5,
   },
 });
 
