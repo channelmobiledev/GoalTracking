@@ -22,6 +22,7 @@ const AddGoalScreen = (props: Props) => {
    *
    */
   const [goal, setGoal] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
 
   /**
    * Loading Animation Component
@@ -52,12 +53,22 @@ const AddGoalScreen = (props: Props) => {
   return (
     <View style={styles.container}>
       <LoadingAnimation />
-      <TextInput
-        mode="outlined"
-        label="Goal"
-        value={goal}
-        onChangeText={text => setGoal(text)}
-      />
+      <View style={{justifyContent: 'flex-start'}}>
+        <TextInput
+          mode="outlined"
+          label="Goal"
+          value={goal}
+          onChangeText={text => setGoal(text)}
+        />
+
+        <TextInput
+          mode="outlined"
+          multiline
+          label="Description"
+          value={description}
+          onChangeText={text => setDescription(text)}
+        />
+      </View>
       <Button
         icon="send"
         mode="contained"
