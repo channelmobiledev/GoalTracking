@@ -3,47 +3,26 @@ import {FlatList} from 'react-native';
 import {List, Text} from 'react-native-paper';
 
 /**
+ * Props
+ */
+interface Props {
+  data: Array<any>;
+  onCategorySelect: (id: number) => void;
+}
+
+/**
  * Goal Category Screen
  */
-const GoalCategoryScreen = () => {
-  /**
-   * Category data
-   */
-  const data = [
-    {
-      id: 1,
-      title: 'Financial',
-      icon: 'currency-usd',
-    },
-    {
-      id: 2,
-      title: 'Heath',
-      icon: 'dumbbell',
-    },
-    {
-      id: 3,
-      title: 'Career',
-      icon: 'briefcase-outline',
-    },
-    {
-      id: 4,
-      title: 'Relationship',
-      icon: 'heart-pulse',
-    },
-    {
-      id: 5,
-      title: 'Education',
-      icon: 'book-open-page-variant',
-    },
-  ];
-
+const GoalCategoryScreen = (props: Props) => {
   /**
    * Render Item List
    */
   const renderItem = ({item}: any) => (
     <List.Item
       title={item.title}
-      onPress={() => {}}
+      onPress={() => {
+        props.onCategorySelect(item.id);
+      }}
       left={props => <List.Icon {...props} icon={item.icon} />}
     />
   );
@@ -54,7 +33,7 @@ const GoalCategoryScreen = () => {
   return (
     <>
       <FlatList
-        data={data}
+        data={props.data}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
       />
