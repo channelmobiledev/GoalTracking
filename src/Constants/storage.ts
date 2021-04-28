@@ -13,8 +13,6 @@ export const storeData = async (goalArray: Array<Goal>) => {
   try {
     const jsonGoalArray = JSON.stringify(goalArray);
     await AsyncStorage.setItem(KEY_GOAL_ARRAY, jsonGoalArray);
-
-    console.log('DEBUG jsonGoalArray: ' + jsonGoalArray);
   } catch (e) {
     console.log('DEBUG Error storeData: ' + JSON.stringify(e));
   }
