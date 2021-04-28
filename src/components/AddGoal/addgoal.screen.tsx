@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {
   ActivityIndicator,
   Button,
@@ -51,7 +51,7 @@ const AddGoalScreen = (props: Props) => {
    * Render
    */
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <LoadingAnimation />
       <View style={{justifyContent: 'flex-start'}}>
         <TextInput
@@ -69,13 +69,15 @@ const AddGoalScreen = (props: Props) => {
           onChangeText={text => setDescription(text)}
         />
       </View>
-      <Button
-        icon="send"
-        mode="contained"
-        onPress={() => props.onSubmitPress(goal)}>
-        Add Goal
-      </Button>
-    </View>
+      <View style={styles.containerConfirm}>
+        <Button
+          icon="send"
+          mode="contained"
+          onPress={() => props.onSubmitPress(goal)}>
+          Add Goal
+        </Button>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -83,11 +85,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginVertical: 10,
-    marginHorizontal: 20,
+    paddingVertical: 0,
+    paddingHorizontal: 20,
   },
   containerModal: {backgroundColor: 'transparent', padding: 20},
+  containerConfirm: {
+    marginVertical: 20,
+  },
 });
 
 export default AddGoalScreen;
