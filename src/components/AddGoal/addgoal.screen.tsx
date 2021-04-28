@@ -5,8 +5,6 @@ import {
   Button,
   Modal,
   Portal,
-  Provider,
-  Text,
   TextInput,
 } from 'react-native-paper';
 import {theme} from '../../Constants/constants';
