@@ -27,6 +27,9 @@ const GoalsComponent = ({route, navigation}: any) => {
     navigation.navigate('AddGoal');
   };
 
+  /**
+   * Calls when screen focus
+   */
   useFocusEffect(
     useCallback(() => {
       checkReturnData();
