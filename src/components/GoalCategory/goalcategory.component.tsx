@@ -1,46 +1,18 @@
 import React from 'react';
+import {GoalCategoryData} from '../../Constants/constants';
 import GoalCategoryScreen from './goalcategory.screen';
 
 /**
  * Goal Category Component
  */
-const GoalCategoryComponent = () => {
-  /**
-   * Category data
-   */
-  const data = [
-    {
-      id: 0,
-      title: 'Financial',
-      icon: 'currency-usd',
-    },
-    {
-      id: 1,
-      title: 'Heath',
-      icon: 'dumbbell',
-    },
-    {
-      id: 2,
-      title: 'Career',
-      icon: 'briefcase-outline',
-    },
-    {
-      id: 3,
-      title: 'Relationship',
-      icon: 'heart-pulse',
-    },
-    {
-      id: 4,
-      title: 'Education',
-      icon: 'book-open-page-variant',
-    },
-  ];
-
+const GoalCategoryComponent = ({route, navigation}: any) => {
   /**
    * Handles category selection
    */
   const handleCategorySelect = (id: number) => {
-    // TODO
+    navigation.navigate('AddGoal', {
+      id: id,
+    });
   };
 
   /**
@@ -48,7 +20,7 @@ const GoalCategoryComponent = () => {
    */
   return (
     <GoalCategoryScreen
-      data={data}
+      data={GoalCategoryData}
       onCategorySelect={(id: number) => handleCategorySelect(id)}
     />
   );
