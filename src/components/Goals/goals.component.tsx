@@ -6,7 +6,7 @@ import GoalsScreen from './goals.screen';
 /**
  * Goals Component
  */
-const GoalsComponent = ({route, navigation}: any) => {
+const GoalsComponent = ({navigation}: any) => {
   /**
    * States
    */
