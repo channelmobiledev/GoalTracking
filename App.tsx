@@ -30,7 +30,11 @@ const GoalsStackHandler = () => {
         component={GoalsComponent}
         options={{headerShown: false}}
       />
-      <GoalsStack.Screen name="AddGoal" component={AddGoalComponent} />
+      <GoalsStack.Screen
+        name="AddGoal"
+        component={AddGoalComponent}
+        options={{title: 'Add a new Goal'}}
+      />
     </GoalsStack.Navigator>
   );
 };
