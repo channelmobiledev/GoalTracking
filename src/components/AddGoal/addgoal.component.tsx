@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import React, {useCallback, useState} from 'react';
+import {GoalCategoryData} from '../../Constants/constants';
 import {getData, storeData} from '../../Constants/storage';
 import {Goal} from '../../models/GoalModel';
 import AddGoalScreen from './addgoal.screen';
@@ -6,11 +8,21 @@ import AddGoalScreen from './addgoal.screen';
 /**
  * Add goal component
  */
-const AddGoalComponent = ({navigation}: any) => {
+const AddGoalComponent = ({navigation, route}: any) => {
   /**
    * States
    */
   const [loading, setLoading] = useState<boolean>(false);
+  const [categoryId, setCategoryId] = useState<number>(-1);
+
+  /**
+   * Handles when user returns to this screen from category
+   */
+  const handleOnGoingBackCategory = () => {
+    if (route.params?.id) {
+      setCategoryId(route.params?.id);
+    }
+  };
 
   /**
    * Add value to the current goal array
@@ -86,12 +98,23 @@ const AddGoalComponent = ({navigation}: any) => {
   };
 
   /**
+   * Calls when screen focus
+   */
+  useFocusEffect(
+    useCallback(() => {
+      handleOnGoingBackCategory();
+    }, [handleOnGoingBackCategory]),
+  );
+
+  /**
    * Render
    */
   return (
     <>
       <AddGoalScreen
         loading={loading}
+        categoryList={GoalCategoryData}
+        selectedCategory={categoryId}
         showCategoryList={() => showCategoryComponent()}
         onSubmitPress={(goal: string) => handleOnResult(goal)}
       />

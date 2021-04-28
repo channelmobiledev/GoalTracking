@@ -11,6 +11,8 @@ import {theme} from '../../Constants/constants';
 
 interface Props {
   loading: boolean;
+  categoryList: Array<any>;
+  selectedCategory: number;
   showCategoryList: () => void;
   onSubmitPress: (goal: string) => void;
 }
@@ -64,10 +66,16 @@ const AddGoalScreen = (props: Props) => {
         />
         <Button
           style={styles.formFieldStyle}
-          icon="help-circle"
+          icon={
+            props.selectedCategory === -1
+              ? 'help-circle'
+              : props.categoryList[props.selectedCategory].icon
+          }
           mode="contained"
           onPress={() => props.showCategoryList()}>
-          Category
+          {props.selectedCategory === -1
+            ? 'Category'
+            : props.categoryList[props.selectedCategory].title}
         </Button>
         <TextInput
           style={styles.formFieldStyle}
