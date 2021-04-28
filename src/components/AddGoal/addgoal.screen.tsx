@@ -5,12 +5,15 @@ import {
   Button,
   Modal,
   Portal,
+  Provider,
+  Text,
   TextInput,
 } from 'react-native-paper';
 import {theme} from '../../Constants/constants';
 
 interface Props {
   loading: boolean;
+  showCategoryList: () => void;
   onSubmitPress: (goal: string) => void;
 }
 
@@ -65,7 +68,7 @@ const AddGoalScreen = (props: Props) => {
           style={styles.formFieldStyle}
           icon="help-circle"
           mode="contained"
-          onPress={() => {}}>
+          onPress={() => props.showCategoryList()}>
           Category
         </Button>
         <TextInput

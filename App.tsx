@@ -9,6 +9,7 @@ import {Provider as PaperProvider} from 'react-native-paper';
 import {theme} from './src/Constants/constants';
 import {createStackNavigator} from '@react-navigation/stack';
 import AddGoalComponent from './src/components/AddGoal/addgoal.component';
+import GoalCategoryComponent from './src/components/GoalCategory/goalcategory.component';
 
 /**
  * Navigation Stacks
@@ -34,6 +35,11 @@ const GoalsStackHandler = () => {
         name="AddGoal"
         component={AddGoalComponent}
         options={{title: 'Add a new Goal'}}
+      />
+      <GoalsStack.Screen
+        name="GoalCategory"
+        component={GoalCategoryComponent}
+        options={{title: 'Select a category'}}
       />
     </GoalsStack.Navigator>
   );

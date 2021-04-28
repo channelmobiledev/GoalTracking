@@ -71,6 +71,13 @@ const AddGoalComponent = ({navigation}: any) => {
   };
 
   /**
+   * Show Category Component
+   */
+  const showCategoryComponent = () => {
+    navigation.navigate('GoalCategory');
+  };
+
+  /**
    * Returns data from the form
    */
   const handleOnResult = (goal: string) => {
@@ -85,6 +92,7 @@ const AddGoalComponent = ({navigation}: any) => {
     <>
       <AddGoalScreen
         loading={loading}
+        showCategoryList={() => showCategoryComponent()}
         onSubmitPress={(goal: string) => handleOnResult(goal)}
       />
     </>
