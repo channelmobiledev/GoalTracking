@@ -1,5 +1,6 @@
 import {useFocusEffect} from '@react-navigation/core';
 import React, {useCallback, useState} from 'react';
+import {getData} from '../../Constants/storage';
 import GoalsScreen from './goals.screen';
 
 /**
@@ -14,16 +15,9 @@ const GoalsComponent = ({route, navigation}: any) => {
   /**
    * Checks for returning data
    */
-  const checkReturnData = useCallback(() => {
-    if (route.params?.goal) {
-      setData([
-        ...data,
-        {
-          id: (data.length + 1).toString(),
-          title: 'Hello :D 1',
-        },
-      ]);
-    }
+  const checkReturnData = useCallback(async () => {
+    const ArrayGoals = await getData();
+    setData(ArrayGoals);
   }, []);
 
   /**

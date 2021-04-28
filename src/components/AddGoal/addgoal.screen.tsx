@@ -1,8 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Button, TextInput} from 'react-native-paper';
+import {
+  ActivityIndicator,
+  Button,
+  Modal,
+  Portal,
+  TextInput,
+} from 'react-native-paper';
+import {theme} from '../../Constants/constants';
 
 interface Props {
+  loading: boolean;
   onSubmitPress: (goal: string) => void;
 }
 
@@ -16,10 +24,34 @@ const AddGoalScreen = (props: Props) => {
   const [goal, setGoal] = useState<string>('');
 
   /**
+   * Loading Animation Component
+   */
+  const LoadingAnimation = () => {
+    /**
+     * Render
+     */
+    return (
+      <Portal>
+        <Modal
+          visible={props.loading}
+          dismissable={false}
+          contentContainerStyle={styles.containerModal}>
+          <ActivityIndicator
+            size={'large'}
+            animating={true}
+            color={theme.colors.accent}
+          />
+        </Modal>
+      </Portal>
+    );
+  };
+
+  /**
    * Render
    */
   return (
     <View style={styles.container}>
+      <LoadingAnimation />
       <TextInput
         mode="outlined"
         label="Goal"
@@ -44,6 +76,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 20,
   },
+  containerModal: {backgroundColor: 'transparent', padding: 20},
 });
 
 export default AddGoalScreen;
