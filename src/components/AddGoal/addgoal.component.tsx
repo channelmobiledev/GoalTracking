@@ -19,11 +19,7 @@ const AddGoalComponent = ({navigation, route}: any) => {
    * Handles when user returns to this screen from category
    */
   const handleOnGoingBackCategory = () => {
-    console.log('DEBUG REAL category id: ' + route.params?.id);
-
     if (route.params?.id !== undefined) {
-      console.log('DEBUG category id: ' + route.params?.id);
-
       setCategoryId(route.params?.id);
     }
   };
