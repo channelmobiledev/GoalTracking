@@ -1,4 +1,6 @@
-import React, {useState} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import React, {useCallback, useState} from 'react';
+import {GoalCategoryData} from '../../Constants/constants';
 import {getData, storeData} from '../../Constants/storage';
 import {Goal} from '../../models/GoalModel';
 import AddGoalScreen from './addgoal.screen';
@@ -6,16 +8,30 @@ import AddGoalScreen from './addgoal.screen';
 /**
  * Add goal component
  */
-const AddGoalComponent = ({navigation}: any) => {
+const AddGoalComponent = ({navigation, route}: any) => {
   /**
    * States
    */
   const [loading, setLoading] = useState<boolean>(false);
+  const [categoryId, setCategoryId] = useState<number>(-1);
+
+  /**
+   * Handles when user returns to this screen from category
+   */
+  const handleOnGoingBackCategory = () => {
+    if (route.params?.id !== undefined) {
+      setCategoryId(route.params?.id);
+    }
+  };
 
   /**
    * Add value to the current goal array
    */
-  const addToGoalArray = async (title: string, description: string) => {
+  const addToGoalArray = async (
+    title: string,
+    categoryId: number,
+    description: string,
+  ) => {
     /**
      * Shows loading animation
      */
@@ -37,6 +53,7 @@ const AddGoalComponent = ({navigation}: any) => {
         id: currentGoalArray[0].id + 1,
         title,
         description,
+        category: categoryId,
       };
 
       /**
@@ -47,7 +64,7 @@ const AddGoalComponent = ({navigation}: any) => {
       /**
        * Create a new Goal with the default id
        */
-      const goalValue: Goal = {id: 0, title, description};
+      const goalValue: Goal = {id: 0, title, description, category: categoryId};
       /**
        * Save the first Goal into the Goal Array
        */
@@ -71,12 +88,27 @@ const AddGoalComponent = ({navigation}: any) => {
   };
 
   /**
+   * Show Category Component
+   */
+  const showCategoryComponent = () => {
+    navigation.navigate('GoalCategory');
+  };
+
+  /**
    * Returns data from the form
    */
-  const handleOnResult = (goal: string) => {
-    // TODO Refactor the description with an actual description
-    addToGoalArray(goal, 'TODO');
+  const handleOnResult = (goal: string, description: string) => {
+    addToGoalArray(goal, categoryId, description);
   };
+
+  /**
+   * Calls when screen focus
+   */
+  useFocusEffect(
+    useCallback(() => {
+      handleOnGoingBackCategory();
+    }, [handleOnGoingBackCategory]),
+  );
 
   /**
    * Render
@@ -85,7 +117,12 @@ const AddGoalComponent = ({navigation}: any) => {
     <>
       <AddGoalScreen
         loading={loading}
-        onSubmitPress={(goal: string) => handleOnResult(goal)}
+        categoryList={GoalCategoryData}
+        selectedCategory={categoryId}
+        showCategoryList={() => showCategoryComponent()}
+        onSubmitPress={(goal: string, description: string) =>
+          handleOnResult(goal, description)
+        }
       />
     </>
   );
