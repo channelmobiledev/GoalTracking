@@ -25,7 +25,6 @@ const GoalsScreen = (props: Props) => {
     return (
       <List.Item
         title={item.title}
-        description="Item description"
         left={props => <List.Icon {...props} icon="folder" />}
       />
     );
