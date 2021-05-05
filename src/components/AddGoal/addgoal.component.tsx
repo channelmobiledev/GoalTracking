@@ -19,7 +19,11 @@ const AddGoalComponent = ({navigation, route}: any) => {
    * Handles when user returns to this screen from category
    */
   const handleOnGoingBackCategory = () => {
-    if (route.params?.id) {
+    console.log('DEBUG REAL category id: ' + route.params?.id);
+
+    if (route.params?.id !== undefined) {
+      console.log('DEBUG category id: ' + route.params?.id);
+
       setCategoryId(route.params?.id);
     }
   };
@@ -27,7 +31,11 @@ const AddGoalComponent = ({navigation, route}: any) => {
   /**
    * Add value to the current goal array
    */
-  const addToGoalArray = async (title: string, description: string) => {
+  const addToGoalArray = async (
+    title: string,
+    categoryId: number,
+    description: string,
+  ) => {
     /**
      * Shows loading animation
      */
@@ -49,6 +57,7 @@ const AddGoalComponent = ({navigation, route}: any) => {
         id: currentGoalArray[0].id + 1,
         title,
         description,
+        category: categoryId,
       };
 
       /**
@@ -59,7 +68,7 @@ const AddGoalComponent = ({navigation, route}: any) => {
       /**
        * Create a new Goal with the default id
        */
-      const goalValue: Goal = {id: 0, title, description};
+      const goalValue: Goal = {id: 0, title, description, category: categoryId};
       /**
        * Save the first Goal into the Goal Array
        */
@@ -92,9 +101,8 @@ const AddGoalComponent = ({navigation, route}: any) => {
   /**
    * Returns data from the form
    */
-  const handleOnResult = (goal: string) => {
-    // TODO Refactor the description with an actual description
-    addToGoalArray(goal, 'TODO');
+  const handleOnResult = (goal: string, description: string) => {
+    addToGoalArray(goal, categoryId, description);
   };
 
   /**
@@ -116,7 +124,9 @@ const AddGoalComponent = ({navigation, route}: any) => {
         categoryList={GoalCategoryData}
         selectedCategory={categoryId}
         showCategoryList={() => showCategoryComponent()}
-        onSubmitPress={(goal: string) => handleOnResult(goal)}
+        onSubmitPress={(goal: string, description: string) =>
+          handleOnResult(goal, description)
+        }
       />
     </>
   );

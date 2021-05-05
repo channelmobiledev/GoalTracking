@@ -14,7 +14,7 @@ interface Props {
   categoryList: Array<any>;
   selectedCategory: number;
   showCategoryList: () => void;
-  onSubmitPress: (goal: string) => void;
+  onSubmitPress: (goal: string, description: string) => void;
 }
 
 /**
@@ -90,7 +90,7 @@ const AddGoalScreen = (props: Props) => {
         <Button
           icon="send"
           mode="contained"
-          onPress={() => props.onSubmitPress(goal)}>
+          onPress={() => props.onSubmitPress(goal, description)}>
           Add Goal
         </Button>
       </View>
