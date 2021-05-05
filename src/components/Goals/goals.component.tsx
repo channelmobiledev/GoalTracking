@@ -1,5 +1,6 @@
 import {useFocusEffect} from '@react-navigation/core';
 import React, {useCallback, useState} from 'react';
+import {GoalCategoryData} from '../../Constants/constants';
 import {getData} from '../../Constants/storage';
 import GoalsScreen from './goals.screen';
 
@@ -39,7 +40,13 @@ const GoalsComponent = ({navigation}: any) => {
   /**
    * Render
    */
-  return <GoalsScreen data={data} onFABPress={() => handleFABPress()} />;
+  return (
+    <GoalsScreen
+      data={data}
+      categoryList={GoalCategoryData}
+      onFABPress={() => handleFABPress()}
+    />
+  );
 };
 
 export default GoalsComponent;
