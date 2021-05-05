@@ -1,7 +1,7 @@
 import {useFocusEffect} from '@react-navigation/core';
 import React, {useCallback, useState} from 'react';
 import {GoalCategoryData} from '../../Constants/constants';
-import {getData} from '../../Constants/storage';
+import {deleteData, getData} from '../../Constants/storage';
 import GoalsScreen from './goals.screen';
 
 /**
@@ -29,6 +29,15 @@ const GoalsComponent = ({navigation}: any) => {
   };
 
   /**
+   * Delete the selected goal
+   */
+  const onGoalDelete = (goalId: number) => {
+    // TODO add loading and confirmation
+    // TODO force screen update
+    deleteData(goalId);
+  };
+
+  /**
    * Calls when screen focus
    */
   useFocusEffect(
@@ -45,6 +54,7 @@ const GoalsComponent = ({navigation}: any) => {
       data={data}
       categoryList={GoalCategoryData}
       onFABPress={() => handleFABPress()}
+      onItemDelete={(goalId: number) => onGoalDelete(goalId)}
     />
   );
 };
