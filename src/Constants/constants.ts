@@ -19,3 +19,34 @@ export const theme = {
     divider: '#BDBDBD',
   },
 };
+
+/**
+ * Goal Category Data
+ */
+export const GoalCategoryData = [
+  {
+    id: 0,
+    title: 'Financial',
+    icon: 'currency-usd',
+  },
+  {
+    id: 1,
+    title: 'Heath',
+    icon: 'dumbbell',
+  },
+  {
+    id: 2,
+    title: 'Career',
+    icon: 'briefcase-outline',
+  },
+  {
+    id: 3,
+    title: 'Relationship',
+    icon: 'heart-pulse',
+  },
+  {
+    id: 4,
+    title: 'Education',
+    icon: 'book-open-page-variant',
+  },
+];

@@ -8,6 +8,7 @@ import {Goal} from '../../models/GoalModel';
  */
 interface Props {
   onFABPress: () => void;
+  categoryList: Array<any>;
   data: Array<Goal>;
 }
 
@@ -15,6 +16,13 @@ interface Props {
  * Goals Screen
  */
 const GoalsScreen = (props: Props) => {
+  /**
+   * Return the category list
+   */
+  const getCategoryList = () => {
+    return props.categoryList;
+  };
+
   /**
    * Shows the list item view
    */
@@ -25,8 +33,16 @@ const GoalsScreen = (props: Props) => {
     return (
       <List.Item
         title={item.title}
-        description="Item description"
-        left={props => <List.Icon {...props} icon="folder" />}
+        left={props => (
+          <List.Icon
+            {...props}
+            icon={
+              item.category === -1
+                ? 'folder'
+                : getCategoryList()[item.category].icon
+            }
+          />
+        )}
       />
     );
   };

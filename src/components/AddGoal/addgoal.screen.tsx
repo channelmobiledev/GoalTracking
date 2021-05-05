@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {
   ActivityIndicator,
   Button,
@@ -11,7 +11,10 @@ import {theme} from '../../Constants/constants';
 
 interface Props {
   loading: boolean;
-  onSubmitPress: (goal: string) => void;
+  categoryList: Array<any>;
+  selectedCategory: number;
+  showCategoryList: () => void;
+  onSubmitPress: (goal: string, description: string) => void;
 }
 
 /**
@@ -22,6 +25,7 @@ const AddGoalScreen = (props: Props) => {
    *
    */
   const [goal, setGoal] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
 
   /**
    * Loading Animation Component
@@ -50,21 +54,47 @@ const AddGoalScreen = (props: Props) => {
    * Render
    */
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <LoadingAnimation />
-      <TextInput
-        mode="outlined"
-        label="Goal"
-        value={goal}
-        onChangeText={text => setGoal(text)}
-      />
-      <Button
-        icon="send"
-        mode="contained"
-        onPress={() => props.onSubmitPress(goal)}>
-        Add Goal
-      </Button>
-    </View>
+      <View style={styles.containerForm}>
+        <TextInput
+          style={styles.formFieldStyle}
+          mode="outlined"
+          label="Goal"
+          value={goal}
+          onChangeText={text => setGoal(text)}
+        />
+        <Button
+          style={styles.formFieldStyle}
+          icon={
+            props.selectedCategory === -1
+              ? 'help-circle'
+              : props.categoryList[props.selectedCategory].icon
+          }
+          mode="contained"
+          onPress={() => props.showCategoryList()}>
+          {props.selectedCategory === -1
+            ? 'Category'
+            : props.categoryList[props.selectedCategory].title}
+        </Button>
+        <TextInput
+          style={styles.formFieldStyle}
+          mode="outlined"
+          multiline
+          label="Description"
+          value={description}
+          onChangeText={text => setDescription(text)}
+        />
+      </View>
+      <View style={styles.containerConfirm}>
+        <Button
+          icon="send"
+          mode="contained"
+          onPress={() => props.onSubmitPress(goal, description)}>
+          Add Goal
+        </Button>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -72,11 +102,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginVertical: 10,
-    marginHorizontal: 20,
+    paddingVertical: 0,
+    paddingHorizontal: 20,
   },
   containerModal: {backgroundColor: 'transparent', padding: 20},
+  containerForm: {
+    flex: 1,
+  },
+  containerConfirm: {
+    marginVertical: 20,
+  },
+  formFieldStyle: {
+    marginVertical: 5,
+  },
 });
 
 export default AddGoalScreen;
