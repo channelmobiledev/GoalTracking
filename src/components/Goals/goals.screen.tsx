@@ -7,10 +7,10 @@ import {Goal} from '../../models/GoalModel';
  * Props
  */
 interface Props {
+  data: Array<Goal>;
+  categoryList: Array<any>;
   onFABPress: () => void;
   onItemDelete: (id: number) => void;
-  categoryList: Array<any>;
-  data: Array<Goal>;
 }
 
 /**
