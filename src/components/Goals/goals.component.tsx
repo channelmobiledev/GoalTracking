@@ -1,7 +1,8 @@
 import {useFocusEffect} from '@react-navigation/core';
 import React, {useCallback, useState} from 'react';
 import {GoalCategoryData} from '../../Constants/constants';
-import {deleteData, getData} from '../../Constants/storage';
+import {deleteData, getData, updateGoalCheck} from '../../Constants/storage';
+import {Goal} from '../../models/GoalModel';
 import GoalsScreen from './goals.screen';
 
 /**
@@ -11,7 +12,7 @@ const GoalsComponent = ({navigation}: any) => {
   /**
    * States
    */
-  const [data, setData] = useState<Array<any>>([]);
+  const [data, setData] = useState<Array<Goal>>([]);
 
   /**
    * Checks for returning data
@@ -37,6 +38,14 @@ const GoalsComponent = ({navigation}: any) => {
   };
 
   /**
+   * Change the state of the goal check
+   */
+  const onGoalCheck = (goalId: number) => {
+    updateGoalCheck(goalId);
+    checkReturnData();
+  };
+
+  /**
    * Calls when screen focus
    */
   useFocusEffect(
@@ -53,6 +62,7 @@ const GoalsComponent = ({navigation}: any) => {
       data={data}
       categoryList={GoalCategoryData}
       onFABPress={() => handleFABPress()}
+      onItemChangeDone={(goalId: number) => onGoalCheck(goalId)}
       onItemDelete={(goalId: number) => onGoalDelete(goalId)}
     />
   );

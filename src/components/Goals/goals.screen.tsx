@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {FAB, List, Text, Title} from 'react-native-paper';
+import {Checkbox, FAB, List, Text, Title} from 'react-native-paper';
 import {Goal} from '../../models/GoalModel';
 
 /**
@@ -10,6 +10,7 @@ interface Props {
   data: Array<Goal>;
   categoryList: Array<any>;
   onFABPress: () => void;
+  onItemChangeDone: (id: number) => void;
   onItemDelete: (id: number) => void;
 }
 
@@ -34,15 +35,23 @@ const GoalsScreen = (props: Props) => {
     return (
       <List.Item
         title={item.title}
-        left={props => (
-          <List.Icon
-            {...props}
-            icon={
-              item.category === -1
-                ? 'folder'
-                : getCategoryList()[item.category].icon
-            }
-          />
+        left={_props => (
+          <>
+            <Checkbox
+              status={item.isDone ? 'checked' : 'unchecked'}
+              onPress={() => {
+                props.onItemChangeDone(item.id);
+              }}
+            />
+            <List.Icon
+              {..._props}
+              icon={
+                item.category === -1
+                  ? 'folder'
+                  : getCategoryList()[item.category].icon
+              }
+            />
+          </>
         )}
         right={_props => (
           <TouchableOpacity onPress={() => props.onItemDelete(item.id)}>
