@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {FAB, List, Text, Title} from 'react-native-paper';
 import {Goal} from '../../models/GoalModel';
 
@@ -7,9 +7,10 @@ import {Goal} from '../../models/GoalModel';
  * Props
  */
 interface Props {
-  onFABPress: () => void;
-  categoryList: Array<any>;
   data: Array<Goal>;
+  categoryList: Array<any>;
+  onFABPress: () => void;
+  onItemDelete: (id: number) => void;
 }
 
 /**
@@ -42,6 +43,11 @@ const GoalsScreen = (props: Props) => {
                 : getCategoryList()[item.category].icon
             }
           />
+        )}
+        right={_props => (
+          <TouchableOpacity onPress={() => props.onItemDelete(item.id)}>
+            <List.Icon {..._props} icon={'delete'} />
+          </TouchableOpacity>
         )}
       />
     );
@@ -76,7 +82,7 @@ const GoalsScreen = (props: Props) => {
    */
   return (
     <>
-      {props.data ? RenderData() : RenderNoData()}
+      {props.data.length > 0 ? RenderData() : RenderNoData()}
       <FAB style={styles.fab} icon="plus" onPress={() => props.onFABPress()} />
     </>
   );

@@ -1,7 +1,7 @@
 import {useFocusEffect} from '@react-navigation/core';
 import React, {useCallback, useState} from 'react';
 import {GoalCategoryData} from '../../Constants/constants';
-import {getData} from '../../Constants/storage';
+import {deleteData, getData} from '../../Constants/storage';
 import GoalsScreen from './goals.screen';
 
 /**
@@ -19,13 +19,21 @@ const GoalsComponent = ({navigation}: any) => {
   const checkReturnData = useCallback(async () => {
     const ArrayGoals = await getData();
     setData(ArrayGoals);
-  }, []);
+  }, [data]);
 
   /**
    * Handles FAB Press
    */
   const handleFABPress = () => {
     navigation.navigate('AddGoal');
+  };
+
+  /**
+   * Delete the selected goal
+   */
+  const onGoalDelete = (goalId: number) => {
+    deleteData(goalId);
+    checkReturnData();
   };
 
   /**
@@ -45,6 +53,7 @@ const GoalsComponent = ({navigation}: any) => {
       data={data}
       categoryList={GoalCategoryData}
       onFABPress={() => handleFABPress()}
+      onItemDelete={(goalId: number) => onGoalDelete(goalId)}
     />
   );
 };

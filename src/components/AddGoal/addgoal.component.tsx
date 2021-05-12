@@ -47,10 +47,15 @@ const AddGoalComponent = ({navigation, route}: any) => {
      */
     if (currentGoalArray) {
       /**
+       * Get the new goal ID
+       */
+      let newId = currentGoalArray.length > 0 ? currentGoalArray[0].id + 1 : 0;
+
+      /**
        * Create a new Goal
        */
       const goalValue: Goal = {
-        id: currentGoalArray[0].id + 1,
+        id: newId,
         title,
         description,
         category: categoryId,
