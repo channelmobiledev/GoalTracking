@@ -19,7 +19,7 @@ const GoalsComponent = ({navigation}: any) => {
   const checkReturnData = useCallback(async () => {
     const ArrayGoals = await getData();
     setData(ArrayGoals);
-  }, []);
+  }, [data]);
 
   /**
    * Handles FAB Press
@@ -35,6 +35,7 @@ const GoalsComponent = ({navigation}: any) => {
     // TODO add loading and confirmation
     // TODO force screen update
     deleteData(goalId);
+    checkReturnData();
   };
 
   /**
