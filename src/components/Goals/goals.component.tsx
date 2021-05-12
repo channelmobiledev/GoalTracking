@@ -32,8 +32,6 @@ const GoalsComponent = ({navigation}: any) => {
    * Delete the selected goal
    */
   const onGoalDelete = (goalId: number) => {
-    // TODO add loading and confirmation
-    // TODO force screen update
     deleteData(goalId);
     checkReturnData();
   };
