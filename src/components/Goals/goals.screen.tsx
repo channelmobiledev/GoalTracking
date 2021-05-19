@@ -1,6 +1,7 @@
 import React from 'react';
 import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Checkbox, FAB, List, Text, Title} from 'react-native-paper';
+import {Checkbox, Colors, FAB, List, Title} from 'react-native-paper';
+import {useTheme} from 'react-native-paper';
 import {Goal} from '../../models/GoalModel';
 
 /**
@@ -19,6 +20,11 @@ interface Props {
  */
 const GoalsScreen = (props: Props) => {
   /**
+   * Constants
+   */
+  const {colors} = useTheme();
+
+  /**
    * Return the category list
    */
   const getCategoryList = () => {
@@ -34,11 +40,13 @@ const GoalsScreen = (props: Props) => {
      */
     return (
       <List.Item
+        style={{backgroundColor: item.isDone ? colors.accent : '#ffffffff'}}
         title={item.title}
         left={_props => (
           <>
             <Checkbox
               status={item.isDone ? 'checked' : 'unchecked'}
+              color={colors.backdrop}
               onPress={() => {
                 props.onItemChangeDone(item.id);
               }}
