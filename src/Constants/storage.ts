@@ -60,3 +60,31 @@ export const deleteData = async (id: number) => {
     throw new Error('Error delete goal data: ' + e);
   }
 };
+
+/**
+ * Update the current goal check state
+ */
+export const updateGoalCheck = async (id: number) => {
+  try {
+    // Get stored goals
+    let goalArray = await getData();
+
+    // Check if the id exists on goals
+    const indexToUpdate = goalArray.findIndex(goal => goal.id === id);
+
+    // Check if goal exists, if not end operation
+    if (indexToUpdate === -1) {
+      // TODO Make this better :V
+      return;
+    }
+
+    // Update the current check value to the opposite
+    goalArray[indexToUpdate].isDone = !goalArray[indexToUpdate].isDone;
+
+    // Save goal list
+    await storeData(goalArray);
+  } catch (e) {
+    console.log('DEBUG Error updateGoalCheck: ' + JSON.stringify(e));
+    throw new Error('Error updateGoalCheck: ' + e);
+  }
+};

@@ -6,4 +6,5 @@ export type Goal = {
   title: string;
   description: string;
   category: number;
+  isDone: boolean;
 };
